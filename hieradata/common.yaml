@@ -119,6 +119,7 @@ node_class: &node_class
   whitehall_frontend:
     apps:
       - whitehall
+      - government-frontend
 
 govuk::node::s_base::node_apps:
   <<: *node_class
