@@ -29,7 +29,6 @@ class govuk::node::s_frontend_lb (
       'email-alert-frontend',
       'feedback',
       'frontend',
-      'government-frontend',
       'info-frontend',
       'manuals-frontend',
       'service-manual',
@@ -45,7 +44,10 @@ class govuk::node::s_frontend_lb (
       'smartanswers',
     ]:
       servers       => $calculators_frontend_servers;
-    'whitehall-frontend':
+    [
+      'government-frontend',
+      'whitehall-frontend'
+    ]:
       servers       => $whitehall_frontend_servers;
   }
 }
