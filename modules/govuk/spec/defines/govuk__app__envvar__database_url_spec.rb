@@ -27,4 +27,14 @@ describe 'govuk::app::envvar::database_url', :type => :define do
         .with_value('postgresql://test:s%25up%3Aer%2Fsec%40r%2Bet@db.example.com/foo_production')
     end
   end
+  context "with the password parameter missing" do
+    let(:params) {{
+      :type => "postgresql",
+      :username => "test",
+      :password => '',
+      :host => "db.example.com",
+      :database => "foo_production",
+    }}
+    it { is_expected.to raise_error(Puppet::Error, /Password cannot be empty/) }
+  end
 end

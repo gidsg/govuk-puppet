@@ -28,6 +28,9 @@ define govuk::app::envvar::database_url (
   $host,
   $database,
 ) {
+  if $password == '' {
+    fail("Password cannot be empty")
+  }
 
   $escaped_password = inline_template('<%= CGI.escape(@password) %>')
   govuk::app::envvar { "${title}-DATABASE_URL":
