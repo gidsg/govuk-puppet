@@ -15,6 +15,7 @@ class govuk::node::s_transition_db_admin(
   $postgres_backup_min  = 30,
 ) {
   include ::govuk::node::s_base
+  include monitoring::client
 
   if $backup_s3_bucket {
     $ensure = 'present'
