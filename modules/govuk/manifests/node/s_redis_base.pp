@@ -6,12 +6,11 @@ class govuk::node::s_redis_base {
   $redis_max_memory = floor($::memorysize_mb / 4 * 3)
 
   class { 'redis':
-    # conf_dir is needed for compatibility with previous redis module
-    conf_dir             => "/var/lib/redis/${redis_port}/",
-    conf_maxmemory       => "${redis_max_memory}mb",
-    conf_port            => $redis_port,
-    # conf_slowlog_max_len is for compatibility with previous redis module
-    conf_slowlog_max_len => '1024',
+    maxmemory       => "${redis_max_memory}mb",
+    manage_repo     => true,
+    package_ensure  => '4:4.0.8-1chl1~trusty1',
+    port            => $redis_port,
+    slowlog_max_len => '1024',
   }
 
   $redis_mem_warn = $redis_max_memory * 0.8

@@ -25,7 +25,10 @@ class govuk::node::s_development (
   include mongodb::server
   include mysql::client
   include nodejs
-  include redis
+  class { 'redis':
+    manage_repo     => true,
+    package_ensure  => '4:4.0.8-1chl1~trusty1',
+  }
   include tmpreaper
 
   include govuk_python
