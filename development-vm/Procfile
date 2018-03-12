@@ -166,3 +166,6 @@ publishing-components:                govuk_setenv publishing-components       .
 content-audit-tool: govuk_setenv content-audit-tool ./run_in.sh ../../content-audit-tool bundle exec rails server -p 3213
 content-audit-tool-sidekiq-google-analytics:  govuk_setenv content-audit-tool ./run_in.sh ../../content-audit-tool bundle exec sidekiq -C ./config/sidekiq/google_analytics.yml
 content-audit-tool-sidekiq-publishing-api:  govuk_setenv content-audit-tool ./run_in.sh ../../content-audit-tool bundle exec sidekiq -C ./config/sidekiq/publishing_api.yml
+datagovuk_publish: govuk_setenv datagovuk_publish ./run_in.sh ../../datagovuk_publish bundle exec rails server -p 3214
+datagovuk_publish-worker:      govuk_setenv datagovuk_publish             ./run_in.sh ../../datagovuk_publish      bundle exec sidekiq -C ./config/sidekiq.yml
+datagovuk_find: govuk_setenv datagovuk_find ./run_in.sh ../../datagovuk_find bundle exec rails server -p 3215

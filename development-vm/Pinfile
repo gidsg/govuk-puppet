@@ -21,6 +21,8 @@ process :'content-store'
 # Example usage: bowl [your-app] dummy-content-store --without content-store
 process :'dummy-content-store'
 process :'content-tagger' => [:'publishing-api', :'content-tagger-sidekiq']
+process :'datagovuk_find' => [:'content-store']
+process :'datagovuk_publish' => [:'datagovuk_publish-worker', :'publishing-api']
 process :'draft-content-store'
 process :'draft-government-frontend' => [:'government-frontend', :'draft-content-store', :'draft-static']
 process :'draft-manuals-frontend' => [:'manuals-frontend', :'draft-content-store', :'draft-static']
