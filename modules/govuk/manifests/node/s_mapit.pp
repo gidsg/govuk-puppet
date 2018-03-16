@@ -4,9 +4,11 @@ class govuk::node::s_mapit inherits govuk::node::s_base {
 
   include nginx
 
-  Govuk_mount['/var/lib/postgresql']
-  ->
-  class { 'govuk_postgresql::server::standalone': }
+  if ! $::aws_migration {
+    Govuk_mount['/var/lib/postgresql']
+    ->
+    class { 'govuk_postgresql::server::standalone': }
+  }
 
   include collectd::plugin::memcached
   class { 'memcached':
