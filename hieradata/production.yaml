@@ -77,9 +77,6 @@ govuk::apps::asset_manager::aws_region: 'eu-west-1'
 govuk::apps::content_store::performance_platform_big_screen_view_url: 'https://performance-platform-big-screen-view-production.cloudapps.digital'
 govuk::apps::content_store::performance_platform_spotlight_url: 'https://performance-platform-spotlight-production.cloudapps.digital'
 govuk::apps::email_alert_api::db::backend_ip_range: '10.3.3.0/24'
-govuk::apps::email_alert_api::govdelivery_account_code: 'UKGOVUK'
-govuk::apps::email_alert_api::govdelivery_hostname: 'api.govdelivery.com'
-govuk::apps::email_alert_api::govdelivery_public_hostname: 'public.govdelivery.com'
 govuk::apps::email_alert_api::govuk_notify_template_id: 'cb633abc-6ae6-4843-ae6f-82ca500b6de2'
 govuk::apps::hmrc_manuals_api::publish_topics: false
 govuk::apps::kibana::logit_environment: 0ea55710-075b-4eab-bfc3-475f28cdd0c3
@@ -126,8 +123,7 @@ govuk_jenkins::jobs::network_config_deploy::environments:
   - 'carrenza-production-dr'
   - 'skyscape-production'
 
-govuk_jenkins::jobs::content_audit_tool::rake_import_all_content_items_frequency: '0 1 * * 0,3'
-govuk_jenkins::jobs::content_audit_tool::rake_import_all_ga_metrics_frequency: '0 6 * * 0,3'
+govuk_jenkins::jobs::content_audit_tool::rake_etl_master_process_cron_schedule: '0 1 * * *'
 
 govuk_jenkins::jobs::content_performance_manager::rake_import_all_content_items_frequency: '0 2 * * *'
 govuk_jenkins::jobs::content_performance_manager::rake_import_all_ga_metrics_frequency: '0 7 * * *'

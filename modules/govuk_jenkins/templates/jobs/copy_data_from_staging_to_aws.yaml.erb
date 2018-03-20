@@ -8,19 +8,22 @@
               - master
 
 - job:
-    name: Copy_Data_from_Staging_to_AWS
-    display-name: Copy_Data_from_Staging_to_AWS
+    name: Copy_Data_from_Staging_to_AWS_Staging
+    display-name: Copy_Data_from_Staging_to_AWS_Staging
     project-type: freestyle
     description: |
-        This job copies databases from staging to AWS. It runs nightly and
-        can be run in an ad-hoc fashion. It doesn't copy the signon or
-        performance-platform databases.
+        This job copies databases from Carrenza staging to AWS. It runs
+        nightly and can be run in an ad-hoc fashion. It doesn't copy the signon
+        or performance-platform databases.
     properties:
         - github:
             url: https://github.com/alphagov/env-sync-and-backup/
         - inject:
             properties-content: |
               PARALLEL_JOBS=3
+        - build-discarder:
+            days-to-keep: 30
+            artifact-num-to-keep: 5
         - slack:
             notify-start: true
             notify-success: true
@@ -36,8 +39,6 @@
       - env-sync-and-backup_Copy_Data_to_Staging
     logrotate:
         numToKeep: 10
-    triggers:
-        - timed: 'H 11 * * *'
     builders:
         - shell: |
             set +x
@@ -51,21 +52,15 @@
             sed -i.bak "s/PG_SRC_ENV_SYNC_PW=PLACEHOLDER/PG_SRC_ENV_SYNC_PW='<%= @pg_src_env_sync_pw %>'/" scripts/sync-postgresql.sh
             sed -i "s/PG_DST_ENV_SYNC_PW=PLACEHOLDER/PG_DST_ENV_SYNC_PW='<%= @pg_dst_env_sync_pw %>'/" scripts/sync-postgresql.sh
 
-            set +e
+            echo "Putting in the real Transition Postgresql transition password"
+            sed -i.bak "s/PG_TR_SRC_ENV_SYNC_PW=PLACEHOLDER/PG_TR_SRC_ENV_SYNC_PW='<%= @pg_tr_src_env_sync_pw %>'/" scripts/sync-transition-postgresql.sh
+            sed -i "s/PG_TR_DST_ENV_SYNC_PW=PLACEHOLDER/PG_TR_DST_ENV_SYNC_PW='<%= @pg_tr_dst_env_sync_pw %>'/" scripts/sync-transition-postgresql.sh
 
-            echo "Disabling Gor traffic replay"
-            for box in $(govuk_node_list -C 'govuk_gor'); do
-              ssh deploy@${box} 'echo "true" > /etc/govuk/env.d/FACTER_data_sync_in_progress; sudo initctl stop gor';
-            done
+            set +e
 
             echo "Running Data Sync"
             bash sync staging aws-staging
             EXITCODE=$?
-
-            echo "Re-enabling Gor traffic replay"
-            for box in $(govuk_node_list -C 'govuk_gor'); do
-              ssh deploy@${box} 'echo "" > /etc/govuk/env.d/FACTER_data_sync_in_progress; sudo initctl start gor';
-            done
 
             exit $EXITCODE
     publishers:
