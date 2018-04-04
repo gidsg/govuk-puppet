@@ -35,13 +35,7 @@ class govuk_jenkins::package (
     key          => '3803E444EB0235822AA36A66EC5FE1A937E3ACBB',
   }
 
-  class { 'govuk_java::set_defaults':
-    jdk     => 'openjdk7',
-    jre     => 'openjdk7',
-    require => [
-                  Class['govuk_java::openjdk7::jdk'],
-                  Class['govuk_java::openjdk7::jre'],
-                ],
+  class { 'govuk_java::oracle8':
     notify  => Class['jenkins::service'],
   }
 
@@ -54,7 +48,7 @@ class govuk_jenkins::package (
     manage_user        => false,
     manage_group       => false,
     plugin_hash        => $plugins,
-    require            => Class['govuk_java::set_defaults'],
+    require            => Class['govuk_java::oracle8'],
   }
 
   class { 'govuk_jenkins::pipeline':
