@@ -64,7 +64,7 @@ mod 'puppetlabs/postgresql',
   :ref => '2b30e3e1cbb2772bee848d802f6f00cc790a2947'
 
 # Our modules on the Forge.
-mod 'gdsoperations/aptly', '0.6.0'
+mod 'gdsoperations/aptly', '0.9.1'
 mod 'gdsoperations/auditd', '0.2.0'
 mod 'gdsoperations/goenv', '0.0.4'
 mod 'gdsoperations/graphite', '~> 2.0.6'
