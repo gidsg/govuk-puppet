@@ -89,7 +89,6 @@ class govuk::apps::asset_manager(
       sentry_dsn               => $sentry_dsn,
       vhost_ssl_only           => true,
       health_check_path        => '/healthcheck',
-      log_format_is_json       => true,
       deny_framing             => $deny_framing,
       depends_on_nfs           => true,
       nginx_extra_config       => template('govuk/asset_manager_extra_nginx_config.conf.erb'),

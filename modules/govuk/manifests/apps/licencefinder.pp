@@ -40,7 +40,6 @@ class govuk::apps::licencefinder(
     port                  => $port,
     sentry_dsn            => $sentry_dsn,
     health_check_path     => '/licence-finder/sectors',
-    log_format_is_json    => true,
     asset_pipeline        => true,
     asset_pipeline_prefix => 'licencefinder',
     repo_name             => 'licence-finder',

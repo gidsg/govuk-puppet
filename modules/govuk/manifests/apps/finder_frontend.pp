@@ -38,7 +38,6 @@ class govuk::apps::finder_frontend(
       port                   => $port,
       sentry_dsn             => $sentry_dsn,
       health_check_path      => '/cma-cases',
-      log_format_is_json     => true,
       asset_pipeline         => true,
       asset_pipeline_prefix  => 'finder-frontend',
       nagios_memory_warning  => $nagios_memory_warning,

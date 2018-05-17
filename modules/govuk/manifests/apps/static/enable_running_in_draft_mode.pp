@@ -51,7 +51,6 @@ class govuk::apps::static::enable_running_in_draft_mode(
     app_type              => 'rack',
     port                  => $port,
     health_check_path     => '/templates/wrapper.html.erb',
-    log_format_is_json    => true,
     nginx_extra_config    => template('govuk/static_extra_nginx_config.conf.erb'),
     asset_pipeline        => true,
     asset_pipeline_prefix => $app_name,

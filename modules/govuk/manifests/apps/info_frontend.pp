@@ -38,7 +38,6 @@ class govuk::apps::info_frontend(
     port                  => $port,
     sentry_dsn            => $sentry_dsn,
     vhost_aliases         => $vhost_aliases,
-    log_format_is_json    => true,
     asset_pipeline        => true,
     asset_pipeline_prefix => 'info-frontend',
     health_check_path     => '/healthcheck',

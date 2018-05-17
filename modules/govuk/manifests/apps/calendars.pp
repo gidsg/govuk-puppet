@@ -33,7 +33,6 @@ class govuk::apps::calendars(
     port                  => $port,
     sentry_dsn            => $sentry_dsn,
     health_check_path     => '/bank-holidays',
-    log_format_is_json    => true,
     asset_pipeline        => true,
     asset_pipeline_prefix => 'calendars',
   }

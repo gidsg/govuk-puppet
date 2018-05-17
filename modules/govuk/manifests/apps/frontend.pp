@@ -64,7 +64,6 @@ class govuk::apps::frontend(
     sentry_dsn               => $sentry_dsn,
     vhost_protected          => $vhost_protected,
     health_check_path        => '/',
-    log_format_is_json       => true,
     asset_pipeline           => true,
     asset_pipeline_prefix    => 'frontend',
     nagios_memory_warning    => $nagios_memory_warning,

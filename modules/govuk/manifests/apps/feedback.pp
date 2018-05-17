@@ -39,7 +39,6 @@ class govuk::apps::feedback(
     port                  => $port,
     sentry_dsn            => $sentry_dsn,
     health_check_path     => '/contact',
-    log_format_is_json    => true,
     asset_pipeline        => true,
     asset_pipeline_prefix => $app_name,
   }

@@ -67,7 +67,6 @@ class govuk::apps::authenticating_proxy(
     sentry_dsn         => $sentry_dsn,
     vhost_ssl_only     => true,
     health_check_path  => '/healthcheck',
-    log_format_is_json => true,
   }
 
   if $govuk_upstream_uri {

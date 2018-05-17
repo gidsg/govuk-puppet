@@ -177,7 +177,6 @@ class govuk::apps::whitehall(
     vhost                    => $vhost,
     port                     => $port,
     sentry_dsn               => $sentry_dsn,
-    log_format_is_json       => true,
     health_check_path        => $health_check_path,
     expose_health_check      => false,
     json_health_check        => true,

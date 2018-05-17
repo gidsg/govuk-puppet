@@ -52,7 +52,7 @@
 # Whether the legacy application logs are in JSON format. If set to true,
 # logstream will consume this as a logstash JSON event formatted stream.
 #
-# Default: false
+# Default: true
 #
 # [*health_check_path*]
 # path at which to check the status of the application.
@@ -232,7 +232,7 @@ define govuk::app (
   $port = 0,
   $command = undef,
   $create_pidfile = 'NOTSET',
-  $log_format_is_json = false,
+  $log_format_is_json = true,
   $health_check_path = 'NOTSET',
   $expose_health_check = true,
   $json_health_check = false,

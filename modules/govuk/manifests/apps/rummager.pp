@@ -105,7 +105,6 @@ class govuk::apps::rummager(
     # cluster running in backend VDC.
     vhost_aliases            => ['search'],
 
-    log_format_is_json       => true,
     nginx_extra_config       => '
     client_max_body_size 500m;
 

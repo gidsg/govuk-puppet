@@ -77,7 +77,6 @@ class govuk::apps::imminence(
     sentry_dsn               => $sentry_dsn,
     vhost_ssl_only           => true,
     health_check_path        => '/',
-    log_format_is_json       => true,
     asset_pipeline           => true,
     nagios_memory_warning    => $nagios_memory_warning,
     nagios_memory_critical   => $nagios_memory_critical,

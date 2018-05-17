@@ -69,7 +69,6 @@ class govuk::apps::service_manual_publisher(
 
   govuk::app { $app_name:
     app_type           => 'rack',
-    log_format_is_json => true,
     port               => $port,
     sentry_dsn         => $sentry_dsn,
     vhost_ssl_only     => true,

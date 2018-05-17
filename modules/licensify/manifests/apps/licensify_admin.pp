@@ -15,7 +15,6 @@ class licensify::apps::licensify_admin(
     json_health_check              => true,
     require                        => File['/etc/licensing'],
     proxy_http_version_1_1_enabled => true,
-    log_format_is_json             => true,
   }
 
   licensify::apps::envvars { 'licensify-admin':

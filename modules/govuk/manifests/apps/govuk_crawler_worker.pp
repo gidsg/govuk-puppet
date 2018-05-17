@@ -96,7 +96,6 @@ class govuk::apps::govuk_crawler_worker (
 
     govuk::app { 'govuk_crawler_worker':
       app_type           => 'bare',
-      log_format_is_json => true,
       port               => $port,
       command            => './govuk_crawler_worker -json',
       health_check_path  => '/healthcheck',

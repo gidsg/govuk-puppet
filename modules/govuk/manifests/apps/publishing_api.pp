@@ -132,7 +132,6 @@ class govuk::apps::publishing_api(
     sentry_dsn         => $sentry_dsn,
     vhost_ssl_only     => true,
     health_check_path  => '/healthcheck',
-    log_format_is_json => true,
     deny_framing       => true,
   }
 

@@ -80,7 +80,6 @@ class govuk::apps::manuals_publisher(
     port               => $port,
     sentry_dsn         => $sentry_dsn,
     health_check_path  => '/healthcheck',
-    log_format_is_json => true,
     nginx_extra_config => 'client_max_body_size 500m;',
   }
 

@@ -59,7 +59,6 @@ class govuk::apps::search_admin(
     sentry_dsn         => $sentry_dsn,
     vhost_ssl_only     => true,
     health_check_path  => '/queries',
-    log_format_is_json => true,
     asset_pipeline     => true,
     deny_framing       => true,
   }
