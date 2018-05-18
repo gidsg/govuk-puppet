@@ -1,0 +1,78 @@
+---
+- scm:
+    name: Test_Deploy_DNS
+    scm:
+        - git:
+            url: git@github.com:alphagov/govuk-dns.git
+            branches:
+              - master
+            wipe-workspace: true
+            clean:
+                after: true
+
+- job:
+    name: Test_Deploy_DNS
+    display-name: Test_Deploy_DNS
+    project-type: freestyle
+    properties:
+        - build-discarder:
+            days-to-keep: 30
+            artifact-num-to-keep: 5
+        - github:
+            url: https://github.com/alphagov/govuk-dns/
+    scm:
+      - Test_Deploy_DNS
+    wrappers:
+        - ansicolor:
+            colormap: xterm
+        - build-name:
+          name: '${ENV,var="PROVIDERS"} ${ENV,var="DNS_BRANCH"} ${ENV,var="CONFIG_BRANCH"} ${ENV,var="ACTION"}'
+        - credentials-binding:
+            - text:
+               credential-id: <%= @gce_credential_id %>
+               variable: GOOGLE_CREDENTIALS
+    builders:
+        - shell: |
+            export GOOGLE_PROJECT=<%= @gce_project_id %>
+            export GOOGLE_REGION=europe-west1
+            export DEPLOY_ENV=<%= @environment %>
+
+            export ZONEFILE=$ZONE.yaml
+            ./jenkins.sh ${DNS_BRANCH} ${CONFIG_BRANCH} ${ACTION}
+    parameters:
+        - string:
+            name: DNS_BRANCH
+            default: master
+            description: The branch of govuk-dns to deploy from (default: master) 
+        - string:
+            name: CONFIG_BRANCH
+            default: master
+            description: The branch of govuk-dns-config to deploy from (default: master)
+        - choice:
+            name: PROVIDERS
+            choices:
+                - PICK ONE
+                - aws
+                - gcp
+        - choice:
+            name: ZONE
+            description: Choose the zone to deploy
+            choices: <%= ['-- Choose a zone'] + @zones %>
+        - string:
+            name: AWS_ACCESS_KEY_ID
+            default: false
+            description: This is required for all providers
+        - password:
+            name: AWS_SECRET_ACCESS_KEY
+            default: false
+            description: This is required for all providers
+        - password:
+            name: AWS_SESSION_TOKEN
+            default: false
+            description: This is required for all providers
+        - choice:
+            name: ACTION
+            description: Choose whether to plan (default) or apply
+            choices:
+                - plan
+                - apply
